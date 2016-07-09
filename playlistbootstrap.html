@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Playlist Bootstrap</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: pink;">
+
+<div class="container">
+  <h2>Playlist</h2>
+  <div id="master" class="list-group">
+   
+  </div>
+</div>
+
+<div class="container">
+  <h2>Suggestions</h2>
+  <table id="songs" class="table table-striped">
+    <tr><td></td><th>Ariel</th><th>Julia</th><th>Mary</th></tr>
+    <tr>
+    <td>Formation, Beyonce</td>
+     <!-- <button>NO</button><button>YES</button></td><button>NO</button><button>YES</button></td><button>NO</button><button>YES</button> -->
+      <td>
+        <button onclick="yes(1)">YES</button><button onclick="no(1)">NO</button>
+     </td>
+     <td>
+        <button onclick="yes(1)">YES</button><button onclick="no(1)">NO</button>
+     </td>
+     <td>
+        <button onclick="yes(1)">YES</button><button onclick="no(1)">NO</button>
+     </td>
+   </tr>
+  </table>
+</div>
+
+<div class="container" style="padding-top: 50px;">
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="song-title">Song Title:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="song-title" placeholder="Song Title">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="song-artist">Song Artist:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="song-artist" placeholder="Song Artist">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-4">
+        <button type="button" name="action" class="btn btn-default" onclick="addSong()">Add Song</button>
+      </div>
+    </div>
+  </form>
+
+    <p>By Ariel, Julia, Mary, Emma, and Jen</p>
+
+
+<!--
+  <form class="form-horizontal" role="form" style="padding-top: 30px;">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="user">User:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="user" placeholder="User">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-4">
+        <button type="submit" class="btn btn-default" onclick="addUser()">Add User</button>
+      </div>
+    </div>
+  </form>
+</div>
+-->
+
+<script>
+var numRows = 1;
+var songs = [0];
+var texts = ["Formation, Beyonce"];
+
+var userButtons = function userButtons(r) {
+  return "<button onclick='yes("+r.toString()+")'>YES</button><button onclick='no("+r.toString()+")'>NO</button>";
+}
+
+var masterRow = function masterRow(t) {
+  return '<a href="#" class="list-group-item"><img src= https://help.saba.com/support/images/thumb/e/ef/Play-button.png/30px-Play-button.png>'+t+'</a>';
+}
+
+var addSong = function addSong() {
+  console.log("adding song");
+  var title = document.getElementById("song-title").value;
+  var artist = document.getElementById("song-artist").value;
+  var table = document.getElementById("songs");
+  var row = table.insertRow(numRows+1);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  var cell4 = row.insertCell(3);
+  cell1.innerHTML = title.concat(", ").concat(artist);
+  cell2.innerHTML = userButtons(numRows+1);
+  cell3.innerHTML = userButtons(numRows+1);
+  cell4.innerHTML = userButtons(numRows+1);
+  numRows += 1;
+  songs.push(0);
+  texts.push(cell1.innerHTML);
+}
+
+var yes = function yes(n) {
+  console.log(n);
+  songs[n-1] += 1;
+  console.log(songs[n-1]);
+  if (songs[n-1] == 3) {
+    var d = document.getElementById("master");
+    d.innerHTML = d.innerHTML + masterRow(texts[n-1]);
+  }
+}
+
+var no = function no(n) {
+  console.log("turn red");
+}
+</script>
+
+</body>
+</html> 
